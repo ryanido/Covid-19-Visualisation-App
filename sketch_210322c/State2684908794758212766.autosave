@@ -1,0 +1,69 @@
+class State {
+  String name;
+  String area;
+  int geoid;
+  ArrayList <String>areas=new ArrayList();
+  
+  State(String stateName)
+  {
+    this.name=stateName;
+  }
+  
+  ArrayList allStates(String currentState)
+  {
+    boolean add=true;
+    if (statesArray.size()==0)
+    {
+      statesArray.add(currentState);
+    } else
+    {
+      for (int i=0; i<statesArray.size(); i++)
+      {
+        String exisiting= (String) statesArray.get(i);
+        if (exisiting.contains(currentState))
+        {
+          add=false;
+        }
+      }
+      if  (add==true)
+      {
+        statesArray.add(currentState);
+      }
+      add=true;
+    }
+    return statesArray;
+  }
+
+  // function that filters the areas based on state passed into it
+  ArrayList getAreas(String county)
+  {
+    boolean add=true;
+    for (int i=0; i<allData.size(); i++)
+    {
+      DataPoint tester= (DataPoint) allData.get(i);
+      String currentCounty=tester.county;
+      if (currentCounty.contains(county))
+      {
+        String taken=tester.area;
+        if (areas.size()==0)
+        {
+          areas.add(taken);
+        } else {
+          for (int index=0; index<areas.size(); index++)
+          {
+            if (taken.contains(areas.get(index)))
+            {
+              add=false;
+            }
+          }
+          if (add==true)
+          {
+            areas.add(taken);
+          }
+          add=true;
+        }
+      }
+    }
+    return areas;
+  }
+}
